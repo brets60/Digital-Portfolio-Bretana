@@ -1,112 +1,159 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { SoundToggle } from "@/components/common/SoundToggle";
-import { MagneticButton } from "@/components/common/MagneticButton";
-import { personalInfo } from "@/lib/data";
-import { Code2, Menu, X, Terminal } from "lucide-react";
+import { Volume2, VolumeX, Sun, Moon, Menu, X } from "lucide-react";
+import { DEVELOPER_PROFILE } from "@/lib/data";
 
 export function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState("home");
+  const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [soundEnabled, setSoundEnabled] = useState(false);
+  const [isDark, setIsDark] = useState(true);
+
+  const navItems = [
+    { label: "Home", href: "#home" },
+    { label: "About", href: "#about" },
+    { label: "Skills", href: "#skills" },
+    { label: "Projects", href: "#projects" },
+    { label: "Capstone", href: "#capstone" },
+    { label: "Education", href: "#education" },
+    { label: "Experience", href: "#experience" },
+    { label: "Achievements", href: "#achievements" },
+    { label: "Services", href: "#services" },
+    { label: "Contact", href: "#contact" },
+  ];
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 40);
+      setIsScrolled(window.scrollY > 20);
+
+      const sectionIds = [
+        "home",
+        "about",
+        "skills",
+        "projects",
+        "capstone",
+        "education",
+        "experience",
+        "achievements",
+        "services",
+        "contact",
+      ];
+      const scrollPos = window.scrollY + 180;
+
+      for (const id of sectionIds) {
+        const el = document.getElementById(id);
+        if (el) {
+          const top = el.offsetTop;
+          const height = el.offsetHeight;
+          if (scrollPos >= top && scrollPos < top + height) {
+            setActiveSection(id);
+            break;
+          }
+        }
+      }
     };
-    window.addEventListener("scroll", handleScroll);
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const navLinks = [
-    { label: "Projects", href: "#projects" },
-    { label: "Arsenal", href: "#skills" },
-    { label: "Trajectory", href: "#experience" },
-    { label: "Certificates", href: "#certificates" },
-    { label: "Uplink", href: "#contact" },
-  ];
-
   return (
-    <header className="fixed top-0 left-0 right-0 z-40 px-4 sm:px-8 py-4 transition-all duration-300">
-      <div
-        className={`max-w-7xl mx-auto rounded-2xl transition-all duration-300 ${
-          scrolled
-            ? "glass-panel px-5 py-3 border border-white/15 shadow-2xl backdrop-blur-xl"
-            : "px-2 py-2 bg-transparent"
-        }`}
-      >
-        <div className="flex items-center justify-between">
-          {/* Brand Logo */}
-          <MagneticButton href="#" className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-cyan-500 to-purple-600 flex items-center justify-center text-slate-950 font-bold shadow-[0_0_15px_rgba(0,240,255,0.4)]">
-              <Code2 className="w-4 h-4 text-slate-950" />
-            </div>
-            <div className="flex flex-col">
-              <span className="font-heading font-bold text-sm tracking-tight text-white">
-                {personalInfo.name}
-              </span>
-              <span className="text-[10px] font-mono text-cyan-400">
-                JB // BSIT-4
-              </span>
-            </div>
-          </MagneticButton>
+    <header
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-200 ${
+        isScrolled
+          ? "bg-[#070b14]/90 backdrop-blur-md border-b border-[#17223b] py-3.5 shadow-xl"
+          : "bg-transparent py-5"
+      }`}
+    >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+        {/* Logo */}
+        <a href="#home" className="flex items-center gap-1 group">
+          <span className="text-xl sm:text-2xl font-black tracking-tight text-white font-sans">
+            BRETS
+          </span>
+          <span className="w-2 h-2 rounded-full bg-blue-500 group-hover:scale-125 transition-transform"></span>
+        </a>
 
-          {/* Desktop Nav Links */}
-          <nav className="hidden md:flex items-center gap-1 glass-pill px-3 py-1.5 rounded-full border border-white/10">
-            {navLinks.map((link) => (
-              <MagneticButton
-                key={link.label}
-                href={link.href}
-                className="px-3.5 py-1 text-xs font-mono text-slate-300 hover:text-cyan-300 rounded-full transition-colors"
-                dataCursor="pointer"
-              >
-                <span>{link.label}</span>
-              </MagneticButton>
-            ))}
-          </nav>
+        {/* Desktop Navigation Links */}
+        <nav className="hidden xl:flex items-center gap-6 text-xs font-medium">
+          {navItems.map((item) => {
+            const isActive = activeSection === item.href.replace("#", "");
 
-          {/* Right Controls: Sound Toggle + Contact Button */}
-          <div className="flex items-center gap-3">
-            <SoundToggle />
-
-            <MagneticButton
-              href="#contact"
-              className="hidden sm:inline-block rounded-xl overflow-hidden"
-              dataCursor="contact"
-            >
-              <div className="px-4 py-1.5 rounded-xl bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-300 border border-cyan-400/30 text-xs font-mono flex items-center gap-1.5 transition-colors">
-                <Terminal className="w-3.5 h-3.5" />
-                <span>Uplink CLI</span>
-              </div>
-            </MagneticButton>
-
-            {/* Mobile Menu Button */}
-            <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden p-2 rounded-xl glass-panel text-slate-300 hover:text-white"
-              aria-label="Toggle Navigation Menu"
-            >
-              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-            </button>
-          </div>
-        </div>
-
-        {/* Mobile Menu Dropdown */}
-        {mobileMenuOpen && (
-          <div className="md:hidden pt-4 pb-2 border-t border-white/10 mt-3 space-y-2">
-            {navLinks.map((link) => (
+            return (
               <a
-                key={link.label}
-                href={link.href}
-                onClick={() => setMobileMenuOpen(false)}
-                className="block px-3 py-2 rounded-xl text-sm font-mono text-slate-300 hover:text-cyan-300 hover:bg-white/5 transition-colors"
+                key={item.label}
+                href={item.href}
+                className={`relative py-1 transition-colors ${
+                  isActive
+                    ? "text-blue-400 font-semibold"
+                    : "text-slate-300 hover:text-white"
+                }`}
               >
-                {link.label}
+                {item.label}
+                {isActive && (
+                  <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-blue-500 rounded-full" />
+                )}
               </a>
-            ))}
-          </div>
-        )}
+            );
+          })}
+        </nav>
+
+        {/* Controls: Sound + Theme + Mobile Menu Button */}
+        <div className="flex items-center gap-2.5 sm:gap-3">
+          <button
+            onClick={() => setSoundEnabled(!soundEnabled)}
+            className="w-9 h-9 rounded-full bg-[#11192e] border border-[#1e2d4f] hover:border-blue-500/50 flex items-center justify-center text-slate-300 hover:text-white transition-colors"
+            title="Toggle Sound"
+            aria-label="Toggle Sound"
+          >
+            {soundEnabled ? (
+              <Volume2 className="w-4 h-4 text-blue-400" />
+            ) : (
+              <VolumeX className="w-4 h-4 text-slate-400" />
+            )}
+          </button>
+
+          <button
+            onClick={() => setIsDark(!isDark)}
+            className="w-9 h-9 rounded-full bg-[#11192e] border border-[#1e2d4f] hover:border-blue-500/50 flex items-center justify-center text-slate-300 hover:text-white transition-colors"
+            title="Toggle Theme"
+            aria-label="Toggle Theme"
+          >
+            {isDark ? (
+              <Sun className="w-4 h-4 text-amber-400" />
+            ) : (
+              <Moon className="w-4 h-4 text-blue-400" />
+            )}
+          </button>
+
+          {/* Mobile menu trigger */}
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="xl:hidden w-9 h-9 rounded-lg bg-[#11192e] border border-[#1e2d4f] flex items-center justify-center text-slate-300 hover:text-white transition-colors"
+            aria-label="Open Mobile Menu"
+          >
+            {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+          </button>
+        </div>
       </div>
+
+      {/* Mobile Menu Dropdown */}
+      {mobileMenuOpen && (
+        <div className="xl:hidden bg-[#0a1020]/95 backdrop-blur-xl border-b border-[#1b2848] px-6 py-4 space-y-2 mt-2">
+          {navItems.map((item) => (
+            <a
+              key={item.label}
+              href={item.href}
+              onClick={() => setMobileMenuOpen(false)}
+              className="block py-2 text-sm text-slate-200 hover:text-blue-400 border-b border-white/5 transition-colors"
+            >
+              {item.label}
+            </a>
+          ))}
+        </div>
+      )}
     </header>
   );
 }

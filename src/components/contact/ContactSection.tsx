@@ -1,139 +1,163 @@
 "use client";
 
 import { useState } from "react";
-import { Terminal, Send, Mail, MapPin, Copy, Check, Sparkles } from "lucide-react";
-import { personalInfo } from "@/lib/data";
-import { InteractiveTerminal } from "@/components/contact/InteractiveTerminal";
-import { KineticContactForm } from "@/components/contact/KineticContactForm";
-import { playClickSound } from "@/lib/audio";
+import { Mail, Facebook, Github, Linkedin, Send } from "lucide-react";
+import { DEVELOPER_PROFILE } from "@/lib/data";
 
 export function ContactSection() {
-  const [activeTab, setActiveTab] = useState<"terminal" | "form">("terminal");
-  const [copied, setCopied] = useState(false);
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
+  });
+  const [submitted, setSubmitted] = useState(false);
 
-  const handleCopyEmail = () => {
-    playClickSound();
-    navigator.clipboard.writeText(personalInfo.email);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setSubmitted(true);
+    setTimeout(() => setSubmitted(false), 4000);
   };
 
+  const contactItems = [
+    {
+      label: "EMAIL",
+      value: DEVELOPER_PROFILE.contact.email,
+      href: `mailto:${DEVELOPER_PROFILE.contact.email}`,
+      icon: Mail,
+    },
+    {
+      label: "FACEBOOK",
+      value: DEVELOPER_PROFILE.contact.facebook,
+      href: "https://facebook.com",
+      icon: Facebook,
+    },
+    {
+      label: "GITHUB",
+      value: DEVELOPER_PROFILE.contact.github,
+      href: `https://${DEVELOPER_PROFILE.contact.github}`,
+      icon: Github,
+    },
+    {
+      label: "LINKEDIN",
+      value: DEVELOPER_PROFILE.contact.linkedin,
+      href: "#",
+      icon: Linkedin,
+    },
+  ];
+
   return (
-    <section id="contact" className="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto relative z-10">
-      {/* Section Header */}
-      <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
-        <div>
-          <div className="flex items-center gap-2 mb-2">
-            <span className="w-8 h-[2px] bg-cyan-400" />
-            <span className="text-xs font-mono tracking-widest text-cyan-400 uppercase">
-              Direct Uplink
-            </span>
-          </div>
-          <h2 className="text-3xl sm:text-5xl font-heading font-extrabold text-white tracking-tight">
-            Initiate <span className="text-gradient-cyan">Communications</span>
-          </h2>
+    <section id="contact" className="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+      {/* Centered Section Header */}
+      <div className="flex flex-col items-center text-center mb-16 space-y-3">
+        <div className="inline-flex items-center px-3.5 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/30 text-blue-400 text-xs font-semibold uppercase tracking-wider">
+          GET IN TOUCH
         </div>
-
-        {/* Tab Switcher */}
-        <div className="glass-panel p-1 rounded-2xl flex items-center gap-1 self-start md:self-auto border border-white/10">
-          <button
-            onClick={() => {
-              playClickSound();
-              setActiveTab("terminal");
-            }}
-            className={`px-4 py-2 rounded-xl text-xs font-mono flex items-center gap-2 transition-all ${
-              activeTab === "terminal"
-                ? "bg-cyan-500 text-slate-950 font-bold shadow-[0_0_15px_rgba(0,240,255,0.4)]"
-                : "text-slate-400 hover:text-white"
-            }`}
-            data-cursor="pointer"
-          >
-            <Terminal className="w-3.5 h-3.5" />
-            <span>Interactive Terminal</span>
-          </button>
-
-          <button
-            onClick={() => {
-              playClickSound();
-              setActiveTab("form");
-            }}
-            className={`px-4 py-2 rounded-xl text-xs font-mono flex items-center gap-2 transition-all ${
-              activeTab === "form"
-                ? "bg-cyan-500 text-slate-950 font-bold shadow-[0_0_15px_rgba(0,240,255,0.4)]"
-                : "text-slate-400 hover:text-white"
-            }`}
-            data-cursor="pointer"
-          >
-            <Send className="w-3.5 h-3.5" />
-            <span>Kinetic Form</span>
-          </button>
-        </div>
+        <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight">
+          Contact Me
+        </h2>
+        <p className="text-slate-400 text-sm sm:text-base max-w-lg leading-relaxed">
+          Feel free to reach out for inquiries, project discussions, or academic collaborations.
+        </p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-        {/* Left Column: Quick Coordinates Card */}
-        <div className="lg:col-span-4 space-y-6">
-          <div className="glass-panel p-6 sm:p-8 rounded-3xl border border-white/10 space-y-6">
-            <div className="flex items-center gap-2 pb-4 border-b border-white/10">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-              <span className="text-xs font-mono uppercase tracking-wider text-slate-400">
-                DISPATCH COORDINATES
-              </span>
-            </div>
+        {/* Left Column: Contact Channels */}
+        <div className="lg:col-span-5 space-y-4">
+          {contactItems.map((item) => {
+            const Icon = item.icon;
 
-            <div className="space-y-4">
-              <div>
-                <label className="text-xs font-mono text-slate-500 block mb-1">
-                  DIRECT EMAIL
-                </label>
-                <div className="flex items-center justify-between p-3 rounded-xl bg-obsidian-950/60 border border-white/10">
-                  <span className="text-xs sm:text-sm font-mono text-cyan-300 truncate">
-                    {personalInfo.email}
+            return (
+              <a
+                key={item.label}
+                href={item.href}
+                target={item.href.startsWith("http") ? "_blank" : undefined}
+                rel="noopener noreferrer"
+                className="bg-[#0e1629] border border-[#1b2746] hover:border-blue-500/50 rounded-2xl p-5 flex items-center gap-4 transition-all hover:-translate-y-0.5 hover:shadow-lg group block"
+              >
+                <div className="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center shrink-0 text-blue-400 group-hover:scale-105 transition-transform">
+                  <Icon className="w-5 h-5" />
+                </div>
+                <div className="flex flex-col min-w-0">
+                  <span className="text-[11px] font-semibold tracking-wider text-slate-400 uppercase">
+                    {item.label}
                   </span>
-                  <button
-                    onClick={handleCopyEmail}
-                    className="p-1.5 rounded-lg hover:bg-white/10 text-slate-400 hover:text-white transition-colors"
-                    title="Copy Email"
-                    data-cursor="pointer"
-                  >
-                    {copied ? (
-                      <Check className="w-4 h-4 text-emerald-400" />
-                    ) : (
-                      <Copy className="w-4 h-4" />
-                    )}
-                  </button>
+                  <span className="text-sm font-bold text-white group-hover:text-blue-300 transition-colors truncate mt-0.5">
+                    {item.value}
+                  </span>
                 </div>
-              </div>
-
-              <div>
-                <label className="text-xs font-mono text-slate-500 block mb-1">
-                  HEADQUARTERS & TIMEZONE
-                </label>
-                <div className="p-3 rounded-xl bg-obsidian-950/60 border border-white/10 flex items-center gap-2 text-xs sm:text-sm text-slate-300 font-mono">
-                  <MapPin className="w-4 h-4 text-rose-400 shrink-0" />
-                  <span>{personalInfo.location}</span>
-                </div>
-              </div>
-
-              <div>
-                <label className="text-xs font-mono text-slate-500 block mb-1">
-                  AVAILABILITY STATUS
-                </label>
-                <div className="p-3 rounded-xl bg-cyan-950/30 border border-cyan-500/20 text-xs text-cyan-300 font-mono flex items-center gap-2">
-                  <span>{personalInfo.status}</span>
-                </div>
-              </div>
-            </div>
-          </div>
+              </a>
+            );
+          })}
         </div>
 
-        {/* Right Column: Tabbed View (Terminal or Kinetic Form) */}
-        <div className="lg:col-span-8">
-          {activeTab === "terminal" ? (
-            <InteractiveTerminal />
-          ) : (
-            <KineticContactForm />
-          )}
+        {/* Right Column: Contact Form */}
+        <div className="lg:col-span-7 bg-[#0e1629] border border-[#1b2746] rounded-2xl p-6 sm:p-8 shadow-xl">
+          <form onSubmit={handleSubmit} className="space-y-5">
+            <div>
+              <label className="block text-xs font-semibold text-slate-300 mb-2">
+                Full Name
+              </label>
+              <input
+                type="text"
+                required
+                value={formData.name}
+                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                placeholder="Enter your full name"
+                className="w-full bg-[#0a1020] border border-[#1c2948] focus:border-blue-500 rounded-xl px-4 py-3 text-sm text-white placeholder:text-slate-500 outline-none transition-colors"
+              />
+            </div>
+
+            <div>
+              <label className="block text-xs font-semibold text-slate-300 mb-2">
+                Email Address
+              </label>
+              <input
+                type="email"
+                required
+                value={formData.email}
+                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                placeholder="Enter your email address"
+                className="w-full bg-[#0a1020] border border-[#1c2948] focus:border-blue-500 rounded-xl px-4 py-3 text-sm text-white placeholder:text-slate-500 outline-none transition-colors"
+              />
+            </div>
+
+            <div>
+              <label className="block text-xs font-semibold text-slate-300 mb-2">
+                Subject
+              </label>
+              <input
+                type="text"
+                required
+                value={formData.subject}
+                onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
+                placeholder="Enter message subject"
+                className="w-full bg-[#0a1020] border border-[#1c2948] focus:border-blue-500 rounded-xl px-4 py-3 text-sm text-white placeholder:text-slate-500 outline-none transition-colors"
+              />
+            </div>
+
+            <div>
+              <label className="block text-xs font-semibold text-slate-300 mb-2">
+                Message
+              </label>
+              <textarea
+                required
+                rows={4}
+                value={formData.message}
+                onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                placeholder="Type your message here..."
+                className="w-full bg-[#0a1020] border border-[#1c2948] focus:border-blue-500 rounded-xl px-4 py-3 text-sm text-white placeholder:text-slate-500 outline-none transition-colors resize-none"
+              />
+            </div>
+
+            <button
+              type="submit"
+              className="w-full py-3.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-semibold text-sm flex items-center justify-center gap-2 shadow-lg shadow-blue-600/30 transition-all hover:scale-[1.01] active:scale-[0.99]"
+            >
+              <Send className="w-4 h-4" />
+              <span>{submitted ? "Message Sent!" : "Send Message"}</span>
+            </button>
+          </form>
         </div>
       </div>
     </section>

@@ -1,82 +1,54 @@
 "use client";
 
-import { HeroParticleField } from "@/components/canvas/HeroParticleField";
 import { HeroSection } from "@/components/hero/HeroSection";
-import { BentoProjects } from "@/components/projects/BentoProjects";
-import { HorizontalShowcase } from "@/components/projects/HorizontalShowcase";
-import { PhysicsTechStack } from "@/components/skills/PhysicsTechStack";
-import { MilestonesTimeline } from "@/components/experience/MilestonesTimeline";
-import { CertificatesSection } from "@/components/certificates/CertificatesSection";
+import { AboutSection } from "@/components/about/AboutSection";
+import { SkillsSection } from "@/components/skills/SkillsSection";
+import { FeaturedProjectsSection } from "@/components/projects/FeaturedProjectsSection";
+import { EducationSection } from "@/components/education/EducationSection";
+import { ExperienceSection } from "@/components/experience/ExperienceSection";
+import { AchievementsSection } from "@/components/achievements/AchievementsSection";
+import { ServicesSection } from "@/components/services/ServicesSection";
 import { ContactSection } from "@/components/contact/ContactSection";
 
 export default function Home() {
   return (
-    <div className="relative overflow-hidden">
-      {/* Background Interactive 3D WebGL Particle Constellation (Optimized 100% GPU) */}
-      <HeroParticleField />
-
-      {/* Subtle Dot Matrix Cyber Grid Overlay */}
-      <div className="fixed inset-0 cyber-dots opacity-25 pointer-events-none z-0" />
-
-      {/* Hardware-Accelerated Ambient Radial Gradients (No heavy CSS blur filters) */}
+    <div className="relative min-h-screen bg-[#070b14] text-slate-100 selection:bg-blue-600/30 selection:text-blue-300">
+      {/* Subtle Dot Grid Background */}
       <div
-        className="fixed top-0 left-1/4 w-[500px] h-[500px] pointer-events-none -z-10 opacity-70"
+        className="fixed inset-0 pointer-events-none opacity-20 -z-10"
         style={{
-          background: "radial-gradient(circle, rgba(0, 240, 255, 0.05) 0%, transparent 70%)",
-        }}
-      />
-      <div
-        className="fixed top-1/2 right-10 w-[450px] h-[450px] pointer-events-none -z-10 opacity-70"
-        style={{
-          background: "radial-gradient(circle, rgba(157, 78, 221, 0.05) 0%, transparent 70%)",
-        }}
-      />
-      <div
-        className="fixed bottom-10 left-1/3 w-[500px] h-[500px] pointer-events-none -z-10 opacity-70"
-        style={{
-          background: "radial-gradient(circle, rgba(255, 183, 3, 0.04) 0%, transparent 70%)",
+          backgroundImage: "radial-gradient(rgba(59, 130, 246, 0.25) 1px, transparent 1px)",
+          backgroundSize: "32px 32px",
         }}
       />
 
       {/* 1. Hero Section */}
       <HeroSection />
 
-      {/* Decorative Section Divider Wire */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-8 my-8 relative z-10">
-        <div className="h-px bg-gradient-to-r from-transparent via-cyan-500/30 to-transparent" />
+      {/* 2. About Me Section */}
+      <AboutSection />
+
+      {/* 3. Skills & Technologies */}
+      <SkillsSection />
+
+      {/* 4. Featured Projects (Portfolio Showcase & Capstone) */}
+      <div id="capstone">
+        <FeaturedProjectsSection />
       </div>
 
-      {/* 2. Featured Projects (Asymmetric Bento Grid) */}
-      <BentoProjects />
+      {/* 5. Education Timeline */}
+      <EducationSection />
 
-      {/* 3. Pinned Horizontal-Scroll Landmark Showcase */}
-      <HorizontalShowcase />
+      {/* 6. Experience & Activities */}
+      <ExperienceSection />
 
-      {/* 4. Interactive Tech Stack (Matter.js 2D Physics Arena) */}
-      <PhysicsTechStack />
+      {/* 7. Achievements & Official Certifications */}
+      <AchievementsSection />
 
-      {/* Decorative Section Divider Wire */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-8 my-8 relative z-10">
-        <div className="h-px bg-gradient-to-r from-transparent via-purple-500/30 to-transparent" />
-      </div>
+      {/* 8. Capabilities & Services (What I Can Do) */}
+      <ServicesSection />
 
-      {/* 5. Experience & Milestones Timeline */}
-      <MilestonesTimeline />
-
-      {/* Decorative Section Divider Wire */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-8 my-8 relative z-10">
-        <div className="h-px bg-gradient-to-r from-transparent via-cyan-500/30 to-transparent" />
-      </div>
-
-      {/* 6. Academic & Industry Certifications */}
-      <CertificatesSection />
-
-      {/* Decorative Section Divider Wire */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-8 my-8 relative z-10">
-        <div className="h-px bg-gradient-to-r from-transparent via-amber-500/30 to-transparent" />
-      </div>
-
-      {/* 7. Contact Terminal & Kinetic Form */}
+      {/* 9. Contact Me */}
       <ContactSection />
     </div>
   );

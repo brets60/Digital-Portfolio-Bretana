@@ -1,221 +1,325 @@
-import { Milestone, Project, TechSkill, Certificate } from "@/types";
+export interface DeveloperProfile {
+  name: string;
+  nickname: string;
+  fullName: string;
+  course: string;
+  yearLevel: string;
+  field: string;
+  careerGoal: string;
+  roles: string[];
+  bio: string;
+  aboutIntro: string;
+  status: string;
+  stats: { value: string; label: string }[];
+  contact: {
+    email: string;
+    facebook: string;
+    github: string;
+    linkedin: string;
+  };
+}
 
-export const personalInfo = {
-  name: "John Michael D. Bretaña",
-  role: "Software Engineer & Creative Developer",
-  status: "BSIT 4th Year // Available for Roles & Capstone Collaboration",
-  degree: "BS in Information Technology (4th Year)",
-  timezone: "UTC+8",
-  location: "P-7 Kalagutay Base Camp, Maramag, Bukidnon",
-  bio: "4th Year Bachelor of Science in Information Technology (BSIT) student and Software Engineer with a passion for building high-performance systems, computer vision IoT platforms, and scalable web applications. Developer of the Speed Detection CCTV Warning System, Laundry Logistics Platform, and School Event Management Suite.",
-  email: "bretanajohnmichael@gmail.com",
-  github: "https://github.com/brets60",
-  linkedin: "https://linkedin.com",
-  twitter: "https://twitter.com",
-  stats: [
-    { label: "Academic Standing", value: "BSIT 4th Yr" },
-    { label: "Flagship Systems", value: "3 Shipped" },
-    { label: "CV & AI Detection", value: "< 18ms Latency" },
-    { label: "Core Technologies", value: "18+ Stacks" },
-  ],
+export interface ProjectItem {
+  id: string;
+  title: string;
+  category: "all" | "capstone" | "desktop" | "concepts";
+  categoryLabel: string;
+  description: string;
+  techStack: string[];
+  image: string;
+  githubUrl?: string;
+  liveUrl?: string;
+}
+
+export interface ServiceItem {
+  id: string;
+  title: string;
+  description: string;
+  iconName: string;
+}
+
+export interface ExperienceItem {
+  id: string;
+  title: string;
+  description: string;
+  iconName: string;
+}
+
+export interface EducationItem {
+  id: string;
+  period: string;
+  degree: string;
+  institution: string;
+  description: string;
+  tags: string[];
+}
+
+export interface AchievementItem {
+  id: string;
+  title: string;
+  subtitle: string;
+  iconName: string;
+  isCert?: boolean;
+}
+
+export interface CertificateItem {
+  id: string;
+  title: string;
+  theme: string;
+  issuer: string;
+  subIssuer: string;
+  recipient: string;
+  date: string;
+  location: string;
+  image: string;
+  signatories: string[];
+  skills: string[];
+}
+
+export const DEVELOPER_PROFILE: DeveloperProfile = {
+  name: "John Michael Bretaña",
+  nickname: "Brets",
+  fullName: "John Michael Bretaña",
+  course: "BS in Information Technology",
+  yearLevel: "BSIT 3",
+  field: "Information Technology",
+  careerGoal: "Software Developer / IT",
   roles: [
-    "Software Engineer",
-    "BSIT 4th Year Student",
-    "Computer Vision & IoT Developer",
-    "Full-Stack Web Architect",
+    "Software Developer",
+    "BSIT Student",
+    "IoT & System Builder",
+    "Desktop App Developer",
   ],
+  bio: "I am a Bachelor of Science in Information Technology student passionate about software development, system design, database management, hardware integration, and emerging technologies. I enjoy building practical technology solutions that can help people and communities.",
+  aboutIntro:
+    "My name is John Michael Bretaña, also known as Brets. I am currently pursuing a Bachelor of Science in Information Technology. I am interested in software development, desktop applications, database systems, hardware integration, computer networking, and IoT-based technologies.",
+  status: "Available for Projects",
+  stats: [
+    { value: "5+", label: "Projects Built" },
+    { value: "15+", label: "Technologies Mastered" },
+    { value: "1", label: "Capstone Lead System" },
+    { value: "3rd", label: "Year BSIT Student" },
+  ],
+  contact: {
+    email: "bretanajohnmichael@gmail.com",
+    facebook: "John Michael Bretaña",
+    github: "github.com/brets60",
+    linkedin: "Coming Soon",
+  },
 };
 
-export const projects: Project[] = [
+export const personalInfo = {
+  name: DEVELOPER_PROFILE.name,
+  role: DEVELOPER_PROFILE.roles[0],
+  status: DEVELOPER_PROFILE.status,
+  degree: DEVELOPER_PROFILE.course,
+  timezone: "UTC+8",
+  location: "Maramag, Bukidnon",
+  bio: DEVELOPER_PROFILE.bio,
+  email: DEVELOPER_PROFILE.contact.email,
+  github: `https://${DEVELOPER_PROFILE.contact.github}`,
+  linkedin: DEVELOPER_PROFILE.contact.linkedin,
+  twitter: "https://twitter.com",
+  roles: DEVELOPER_PROFILE.roles,
+  stats: DEVELOPER_PROFILE.stats,
+};
+
+export const PROJECTS: ProjectItem[] = [
   {
-    id: "speed-detection-system",
-    title: "Speed Detection & Warning System with Pedestrian Alarm",
-    subtitle: "Real-Time Computer Vision, Vehicle Velocity Tracking & CCTV Safety Alarm",
-    description: "An intelligent traffic safety and surveillance platform utilizing CCTV camera streams, OpenCV/YOLO vehicle tracking, and automated acoustic-visual warning alarms when speeding vehicles approach active pedestrian crosswalks.",
-    longDescription: "Developed as a mission-critical public safety engineering system. The platform processes high-definition CCTV video streams using deep learning object detection (YOLO) and perspective-transformed optical flow to calculate vehicle velocities in real time. Features an automated pedestrian hazard zone monitor that triggers immediate roadside warning strobe/siren alarms whenever approaching vehicles exceed velocity thresholds, coupled with a full-stack administrative telemetry dashboard.",
-    tags: ["Computer Vision", "Python", "OpenCV", "YOLOv8", "Next.js", "WebSockets", "IoT / Arduino", "CCTV Streaming"],
-    metrics: [
-      { label: "Detection Latency", value: "< 18ms Real-time" },
-      { label: "Speed Accuracy", value: "96.4% Precision" },
-      { label: "Pedestrian Alarm", value: "< 45ms Trigger" },
-    ],
-    architecture: [
-      "YOLOv8 and OpenCV pipeline for multi-vehicle bounding box tracking and trajectory smoothing",
-      "Perspective homography matrix converting 2D CCTV camera pixel coordinates into accurate real-world meter velocities",
-      "Microcontroller-interfaced IoT relay triggering physical strobe warning alarms upon crosswalk speed limit breach",
-      "Next.js 14 real-time telemetry console with WebSocket video streaming and automated incident video snapshot capture",
-    ],
-    githubUrl: "https://github.com",
-    liveUrl: "https://example.com/speed-detection",
-    featured: true,
-    bentoSpan: "col-span-12 lg:col-span-8 row-span-2",
-    accentColor: "cyan",
-    gradient: "from-cyan-500/20 via-blue-500/10 to-transparent",
+    id: "speed-detection",
+    title: "Speed Detection and Warning System with Pedestrian Alarm and CCTV Monitoring",
+    category: "capstone",
+    categoryLabel: "Capstone & IoT",
+    description:
+      "A mission-critical intelligent traffic safety system utilizing CCTV video processing, computer vision vehicle velocity tracking, and automated acoustic-visual warning strobe alarms when speeding vehicles approach crosswalks.",
+    techStack: ["Python", "OpenCV", "YOLOv8", "Arduino", "CCTV", "IoT Relay"],
+    image: "/projects/speed-detection.png",
+    githubUrl: "https://github.com/brets60",
   },
   {
-    id: "laundry-management-system",
-    title: "Laundry Pickup & Delivery Management System",
-    subtitle: "On-Demand Logistics, Courier Dispatch & Order Lifecycle Tracker",
-    description: "Full-stack automated booking and courier logistics platform streamlining customer laundry pickup scheduling, weight billing, rider dispatch, and live 5-stage order progress.",
-    longDescription: "An end-to-end digital logistics ecosystem engineered for laundry service operations. Enables customers to schedule flexible doorstep pickups, tracks couriers via GPS coordinates, automates weight and fabric care pricing tiers, and sends real-time order lifecycle notifications from initial pickup to wash, fold, and doorstep delivery.",
-    tags: ["Next.js", "TypeScript", "Node.js", "PostgreSQL", "Tailwind CSS", "REST APIs", "Prisma"],
-    metrics: [
-      { label: "Order Turnaround", value: "+42% Faster" },
-      { label: "Tracking Pipeline", value: "5-Stage Live Sync" },
-      { label: "Billing Accuracy", value: "100% Automated" },
-    ],
-    architecture: [
-      "Role-based authorization (RBAC) supporting Customers, Riders, Laundry Staff, and Super Admins",
-      "Real-time dispatch algorithm matching pending pickups with the nearest available courier",
-      "Responsive mobile-first web app with automated invoice generation and order status timeline",
-      "PostgreSQL relational schema optimizing order history indexing and inventory management",
-    ],
+    id: "laundry-system",
+    title: "Laundry Pickup and Delivery Management System",
+    category: "desktop",
+    categoryLabel: "Desktop Applications",
+    description:
+      "A complete desktop management application built to simplify and automate customer order tracking, weight billing, status updates, and dispatch logistics for laundry operations.",
+    techStack: ["Python", "CustomTkinter", "Tkinter", "SQLite", "Database"],
+    image: "/projects/laundry.png",
     githubUrl: "https://github.com/brets60/Laundry-Pickup-and-Delivery-Management-System",
-    liveUrl: "https://example.com/laundry-logistics",
-    featured: true,
-    bentoSpan: "col-span-12 lg:col-span-4 row-span-1",
-    accentColor: "violet",
-    gradient: "from-purple-500/20 via-violet-500/10 to-transparent",
   },
   {
-    id: "school-event-management",
-    title: "School Event Management System",
-    subtitle: "Institutional Event Scheduling, QR Code Attendance & Analytics Portal",
-    description: "Enterprise academic event coordination suite featuring instantaneous QR code ticket scanning, tamper-proof attendance logging, and automated digital certificate generation.",
-    longDescription: "Engineered to eliminate manual event ticketing and attendance bottlenecks across academic institutions. Students receive personalized cryptographic QR code passes. Event facilitators scan tickets using camera-enabled devices in sub-second intervals with automated duplicate-scan prevention and live capacity tracking.",
-    tags: ["React", "PHP / Laravel", "MySQL", "QR Code Engine", "Tailwind CSS", "PDF Generation", "Chart.js"],
-    metrics: [
-      { label: "Check-in Velocity", value: "< 1.2s per Student" },
-      { label: "Scan Reliability", value: "99.8% Verified" },
-      { label: "Student Capacity", value: "3,500+ Concurrent" },
-    ],
-    architecture: [
-      "High-throughput QR barcode camera scanning engine with client-side frame buffer debouncing",
-      "Instantaneous attendance logging preventing duplicate entries across concurrent campus gates",
-      "Automated digital certificate of participation dispatch with verifiable cryptographic verification hashes",
-      "Administrative analytics dashboard visualizing attendance turnout rates, department tallies, and demographic stats",
-    ],
-    githubUrl: "https://github.com",
-    liveUrl: "https://example.com/event-management",
-    featured: true,
-    bentoSpan: "col-span-12 lg:col-span-4 row-span-1",
-    accentColor: "amber",
-    gradient: "from-amber-500/20 via-orange-500/10 to-transparent",
-  },
-  {
-    id: "aetheris-engine",
-    title: "Aetheris Neural 3D Engine",
-    subtitle: "Real-Time WebGL/WebGPU Particle & Spatial Shader Simulation",
-    description: "Interactive GPU compute shader particle laboratory and creative interactive 3D experiments exploring real-time physics and computer graphics.",
-    longDescription: "Aetheris Engine leverages cutting-edge WebGL2 and WebGPU compute pipelines to execute parallel simulation buffers directly on the GPU. Built with custom GLSL shaders, spring-mass physics solvers, and spatial indexing (BVH), achieving consistent 60 FPS on modern displays.",
-    tags: ["Three.js", "WebGL", "GLSL Shaders", "TypeScript", "Web Audio API", "WebGPU"],
-    metrics: [
-      { label: "Particles Rendered", value: "500k+ @ 60fps" },
-      { label: "GPU Frame Time", value: "< 7.2ms" },
-      { label: "Memory Footprint", value: "42MB VRAM" },
-    ],
-    architecture: [
-      "Instanced mesh rendering with ping-pong framebuffers for GPGPU velocity calculations",
-      "Custom vertex and fragment shaders with Perlin noise & curl vector fields",
-      "Web Audio API frequency analyzer feeding live FFT audio textures to GPU",
-      "Zero-allocation animation loop with SIMD-optimized math transformations",
-    ],
-    githubUrl: "https://github.com",
-    liveUrl: "https://example.com/aetheris",
-    featured: true,
-    bentoSpan: "col-span-12 lg:col-span-12 row-span-1",
-    accentColor: "emerald",
-    gradient: "from-emerald-500/20 via-teal-500/10 to-transparent",
+    id: "govassist",
+    title: "BRETANA GovAssist",
+    category: "concepts",
+    categoryLabel: "Concepts & Proposals",
+    description:
+      "A dedicated software platform designed to streamline public service transactions, citizen document management, institutional service requests, and administrative reporting.",
+    techStack: ["Web / Desktop", "Information System", "Public Service", "Database"],
+    image: "/projects/govassist.png",
+    githubUrl: "https://github.com/brets60",
   },
 ];
 
-export const milestones: Milestone[] = [
+export const SERVICES: ServiceItem[] = [
   {
-    year: "2024 — Present",
-    period: "4th Year Lead",
-    role: "BSIT 4th Year Capstone Lead & Software Engineer",
-    company: "College of Information Technology",
-    location: "Philippines",
-    description: "Spearheading modern full-stack capstone architectures, interactive WebGL 3D systems, and distributed platforms with Next.js, WebSockets, and PostgreSQL.",
-    achievements: [
-      "Leading technical architecture of the departmental capstone platform serving faculty and student workflows",
-      "Architected WebGL 3D interactive data layers supporting dynamic telemetry filtering with sub-10ms response times",
-      "Maintained Dean's Honor Roll academic standing across Systems Analysis, Database Engineering, and Distributed Systems",
-    ],
-    techStack: ["Next.js 14", "TypeScript", "Three.js", "Tailwind CSS", "PostgreSQL", "WebSockets", "Docker"],
-    accent: "cyan",
+    id: "desktop-dev",
+    title: "Desktop Application Development",
+    description: "Creating user-friendly desktop applications using Python, Tkinter, and CustomTkinter.",
+    iconName: "Monitor",
   },
   {
-    year: "2023 — 2024",
-    period: "3rd Year Internship",
-    role: "Full-Stack Software Engineering Intern",
-    company: "TechVenture Innovations",
-    location: "Hybrid / Remote",
-    description: "Developed production web features, REST & GraphQL APIs, and responsive enterprise dashboard interfaces.",
-    achievements: [
-      "Built automated database migration and caching pipelines with Redis and PostgreSQL, reducing query latency by 55%",
-      "Collaborated in agile sprint cycles delivering 15+ production feature releases with cross-functional teams",
-      "Refactored legacy UI components into reusable React/TypeScript design system components",
-    ],
-    techStack: ["React", "Node.js", "TypeScript", "PostgreSQL", "Redis", "Tailwind CSS", "Git"],
-    accent: "violet",
+    id: "web-dev",
+    title: "Web Development",
+    description: "Building clean, modern, and responsive websites using HTML, CSS, and JavaScript.",
+    iconName: "Globe",
   },
   {
-    year: "2022 — 2023",
-    period: "2nd Year",
-    role: "Creative Technologist & Web Developer",
-    company: "Student Tech Hub & Digital Lab",
-    location: "Philippines",
-    description: "Designed and built interactive web applications, departmental student portals, and 3D web graphic experiments.",
-    achievements: [
-      "Constructed departmental student portal serving 2,500+ active university users with 99.9% availability",
-      "Crafted custom Three.js and CSS animation experiences, winning 1st Place in university Web Dev Hackathon",
-      "Delivered 100/100 Google Lighthouse performance ratings across mobile and desktop environments",
-    ],
-    techStack: ["Three.js", "JavaScript", "HTML5 Canvas", "Tailwind CSS", "PHP / MySQL", "Framer Motion"],
-    accent: "amber",
+    id: "database-design",
+    title: "Database Design",
+    description: "Designing relational databases, tables, relationships, and SQL queries.",
+    iconName: "Database",
   },
   {
-    year: "2021 — 2022",
-    period: "1st Year Foundations",
-    role: "BSIT Academic Foundations & Core Programming",
-    company: "Information Technology Department",
-    location: "Philippines",
-    description: "Mastered core computer science and IT fundamentals: Data Structures, OOP, Database Management, and Networking.",
-    achievements: [
-      "Developed high-grade algorithmic solutions and database prototypes in Java, Python, and C++",
-      "Earned top marks in Object-Oriented Programming and Relational Database Systems",
-      "Active officer and technical contributor in university IT student organization",
-    ],
-    techStack: ["Python", "Java", "C++", "MySQL", "Linux", "Git"],
-    accent: "emerald",
+    id: "system-dev",
+    title: "System Development",
+    description: "Developing information systems based on organizational and academic requirements.",
+    iconName: "Settings",
+  },
+  {
+    id: "ui-design",
+    title: "UI Design",
+    description: "Creating clean and intuitive user interfaces with modern layouts.",
+    iconName: "Layout",
+  },
+  {
+    id: "iot-projects",
+    title: "Arduino / IoT Projects",
+    description: "Integrating microcontrollers, sensors, RF modules, and camera modules.",
+    iconName: "Cpu",
+  },
+  {
+    id: "documentation",
+    title: "System Documentation",
+    description: "Creating technical documentation, system guides, and project manuals.",
+    iconName: "FileText",
+  },
+  {
+    id: "troubleshooting",
+    title: "Technical Troubleshooting",
+    description: "Troubleshooting hardware, software, and networking issues.",
+    iconName: "Wrench",
   },
 ];
 
-export const techSkills: TechSkill[] = [
-  { name: "TypeScript", category: "frontend", experience: "5+ yrs", color: "#3178C6" },
-  { name: "React", category: "frontend", experience: "5+ yrs", color: "#61DAFB" },
-  { name: "Next.js", category: "frontend", experience: "4+ yrs", color: "#FFFFFF" },
-  { name: "Three.js", category: "creative", experience: "4+ yrs", color: "#00F0FF" },
-  { name: "WebGL / GLSL", category: "creative", experience: "3+ yrs", color: "#9D4EDD" },
-  { name: "Tailwind CSS", category: "frontend", experience: "4+ yrs", color: "#38BDF8" },
-  { name: "Node.js", category: "backend", experience: "5+ yrs", color: "#68A063" },
-  { name: "Python", category: "backend", experience: "4+ yrs", color: "#FFD43B" },
-  { name: "Go", category: "backend", experience: "2+ yrs", color: "#00ADD8" },
-  { name: "PostgreSQL", category: "backend", experience: "4+ yrs", color: "#336791" },
-  { name: "Redis", category: "backend", experience: "3+ yrs", color: "#DC382D" },
-  { name: "Docker", category: "devops", experience: "4+ yrs", color: "#2496ED" },
-  { name: "GraphQL", category: "backend", experience: "3+ yrs", color: "#E10098" },
-  { name: "Framer Motion", category: "creative", experience: "4+ yrs", color: "#FF0055" },
-  { name: "GSAP", category: "creative", experience: "4+ yrs", color: "#88CE02" },
-  { name: "Matter.js", category: "creative", experience: "2+ yrs", color: "#FFB703" },
-  { name: "WebSockets", category: "backend", experience: "4+ yrs", color: "#10B981" },
-  { name: "Git / CI/CD", category: "devops", experience: "5+ yrs", color: "#F05032" },
+export const EXPERIENCES: ExperienceItem[] = [
+  {
+    id: "capstone",
+    title: "Capstone Project Development",
+    description: "Designed and implemented a hardware and software-based speed detection, pedestrian warning, and CCTV monitoring system.",
+    iconName: "Radio",
+  },
+  {
+    id: "system-dev",
+    title: "System Development",
+    description: "Built desktop management applications using Python and CustomTkinter.",
+    iconName: "Laptop",
+  },
+  {
+    id: "arduino-hardware",
+    title: "Hardware and Arduino Projects",
+    description: "Worked with sensors, RF modules, buzzers, Arduino boards, and ESP32-CAM hardware.",
+    iconName: "Cpu",
+  },
+  {
+    id: "database-dev",
+    title: "Database Development",
+    description: "Designed relational database schemas, tables, queries, and data storage systems.",
+    iconName: "Database",
+  },
+  {
+    id: "software-dev",
+    title: "Software Development",
+    description: "Developed software applications using Python, HTML, CSS, and JavaScript.",
+    iconName: "Code",
+  },
+  {
+    id: "academic-it",
+    title: "Academic IT Projects",
+    description: "Participated in software development, documentation, system design, and laboratory projects.",
+    iconName: "Layers",
+  },
+  {
+    id: "prototype",
+    title: "Prototype Development",
+    description: "Constructed and tested rapid hardware/software prototypes for real-world academic use cases.",
+    iconName: "Hammer",
+  },
 ];
 
-export const certificates: Certificate[] = [
+export const EDUCATION: EducationItem[] = [
   {
-    id: "bsit-seminar-workshop-2026",
+    id: "college",
+    period: "Present — BSIT 3",
+    degree: "Bachelor of Science in Information Technology",
+    institution: "Torres Capitol College, Inc.",
+    description:
+      "Currently enrolled in the Bachelor of Science in Information Technology. Developing practical knowledge in software development, databases, hardware integration, networking, and web technologies.",
+    tags: [
+      "Software Development",
+      "Database Systems",
+      "Programming",
+      "Computer Networking",
+      "Web Development",
+    ],
+  },
+  {
+    id: "shs",
+    period: "Previous Education",
+    degree: "Senior High School / Secondary Education",
+    institution: "Academic Background",
+    description: "Secondary education curriculum with foundational coursework in Information and Communications Technology.",
+    tags: ["ICT Track", "Computer Fundamentals", "Basic Programming"],
+  },
+];
+
+export const ACHIEVEMENTS: AchievementItem[] = [
+  {
+    id: "academic",
+    title: "Academic Achievement",
+    subtitle: "Add academic honors or distinctions here.",
+    iconName: "Award",
+  },
+  {
+    id: "project",
+    title: "Project Achievement",
+    subtitle: "Add capstone milestones or project recognitions here.",
+    iconName: "Trophy",
+  },
+  {
+    id: "certifications",
+    title: "Certification",
+    subtitle: "Official technical certifications and workshop credentials.",
+    iconName: "Medal",
+    isCert: true,
+  },
+  {
+    id: "presentation",
+    title: "Presentation",
+    subtitle: "Add project presentations or defense milestones here.",
+    iconName: "Presentation",
+  },
+  {
+    id: "training",
+    title: "Training / Seminar",
+    subtitle: "Add technical workshops, seminars, or webinars here.",
+    iconName: "BookOpen",
+    isCert: true,
+  },
+];
+
+export const CERTIFICATES: CertificateItem[] = [
+  {
+    id: "cert-1",
     title: "BSIT Seminar-Workshop 2026: Certificate of Participation",
     theme: "CODE + COMMUNICATE: IT HARD SKILLS AND SOFT SKILLS THAT INDUSTRY DEMANDS",
     issuer: "Torres Capitol College, Inc.",
@@ -228,11 +332,10 @@ export const certificates: Certificate[] = [
       "April Jean D. Villas (BSIT Program Head)",
       "Feelin Torres-Jumamil, DM, RN (College President)",
     ],
-    skills: ["Industry Hard Skills", "Soft Skills & Teamwork", "Technical Communication", "BSIT Industry Readiness"],
-    color: "cyan",
+    skills: ["Industry Hard Skills", "Soft Skills", "Technical Communication", "BSIT Readiness"],
   },
   {
-    id: "ict-days-2026",
+    id: "cert-2",
     title: "ICT Days 2026: Certificate of Participation",
     theme: "Create. Compete. Celebrate.",
     issuer: "Torres Capitol College, Inc.",
@@ -245,28 +348,30 @@ export const certificates: Certificate[] = [
       "April Jean D. Villas (BSIT Program Head)",
       "Feelin Torres-Jumamil, DM, RN (College President)",
     ],
-    skills: ["ICT Innovation", "Competitive Programming", "Excellence in IT", "Technical Leadership"],
-    color: "violet",
+    skills: ["ICT Innovation", "Competitive Programming", "Excellence in IT"],
   },
   {
-    id: "digital-danger-zone-seminar",
+    id: "cert-3",
     title: "BSIT Seminar-Workshop: Digital Danger Zone",
     theme: "Digital Danger Zone: Protecting Yourself in the Age of Digital Deception",
     issuer: "Philippine Countryville College, Inc.",
-    subIssuer: "DICT Region 10 & BSIT Department",
+    subIssuer: "In coordination with DICT Region 10",
     recipient: "John Michael D. Bretana",
-    date: "Academic Year 2025–2026",
+    date: "Seminar-Workshop",
     location: "College Library, 2nd Floor, Admin Bldg., PCCI, Maramag, Bukidnon",
     image: "/certificates/certificate-3.webp",
     signatories: [
       "Keren Happuch Lacadin (Project Lead - DICT Region 10)",
       "April Jean D. Villas (BSIT Program Head)",
-      "Feelin T. Jumamil, DM, (CAR), MAN, RN (VP for Administration)",
+      "Feelin T. Jumamil, DM, MAN, RN (VP for Administration)",
       "Gordon M. Torres, EDL (College President)",
       "Fe A. Torres, PhD (Executive Vice President)",
     ],
-    skills: ["Cybersecurity Awareness", "Anti-Phishing & Digital Deception", "DICT Industry Standards", "Information Security"],
-    color: "amber",
+    skills: ["Cybersecurity", "DICT Region 10 Standards", "Digital Safety & Privacy"],
   },
 ];
+
+export const certificates = CERTIFICATES;
+export const projects = PROJECTS;
+export const techSkills: any[] = [];
 
