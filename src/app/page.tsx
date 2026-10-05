@@ -6,6 +6,7 @@ import { BentoProjects } from "@/components/projects/BentoProjects";
 import { HorizontalShowcase } from "@/components/projects/HorizontalShowcase";
 import { PhysicsTechStack } from "@/components/skills/PhysicsTechStack";
 import { MilestonesTimeline } from "@/components/experience/MilestonesTimeline";
+import { CertificatesSection } from "@/components/certificates/CertificatesSection";
 import { ContactSection } from "@/components/contact/ContactSection";
 
 export default function Home() {
@@ -64,10 +65,18 @@ export default function Home() {
 
       {/* Decorative Section Divider Wire */}
       <div className="max-w-7xl mx-auto px-4 sm:px-8 my-8 relative z-10">
+        <div className="h-px bg-gradient-to-r from-transparent via-cyan-500/30 to-transparent" />
+      </div>
+
+      {/* 6. Academic & Industry Certifications */}
+      <CertificatesSection />
+
+      {/* Decorative Section Divider Wire */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-8 my-8 relative z-10">
         <div className="h-px bg-gradient-to-r from-transparent via-amber-500/30 to-transparent" />
       </div>
 
-      {/* 6. Contact Terminal & Kinetic Form */}
+      {/* 7. Contact Terminal & Kinetic Form */}
       <ContactSection />
     </div>
   );

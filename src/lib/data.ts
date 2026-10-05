@@ -1,4 +1,4 @@
-import { Milestone, Project, TechSkill } from "@/types";
+import { Milestone, Project, TechSkill, Certificate } from "@/types";
 
 export const personalInfo = {
   name: "John Michael D. Bretaña",
@@ -212,3 +212,61 @@ export const techSkills: TechSkill[] = [
   { name: "WebSockets", category: "backend", experience: "4+ yrs", color: "#10B981" },
   { name: "Git / CI/CD", category: "devops", experience: "5+ yrs", color: "#F05032" },
 ];
+
+export const certificates: Certificate[] = [
+  {
+    id: "bsit-seminar-workshop-2026",
+    title: "BSIT Seminar-Workshop 2026: Certificate of Participation",
+    theme: "CODE + COMMUNICATE: IT HARD SKILLS AND SOFT SKILLS THAT INDUSTRY DEMANDS",
+    issuer: "Torres Capitol College, Inc.",
+    subIssuer: "BSIT Department (Formerly: Philippine Countryville College, Inc.)",
+    recipient: "BRETAÑA, JOHN MICHAEL D.",
+    date: "April 29, 2026",
+    location: "TCC Covered Court, Panadtalan, Maramag, Bukidnon",
+    image: "/certificates/certificate-1.webp",
+    signatories: [
+      "April Jean D. Villas (BSIT Program Head)",
+      "Feelin Torres-Jumamil, DM, RN (College President)",
+    ],
+    skills: ["Industry Hard Skills", "Soft Skills & Teamwork", "Technical Communication", "BSIT Industry Readiness"],
+    color: "cyan",
+  },
+  {
+    id: "ict-days-2026",
+    title: "ICT Days 2026: Certificate of Participation",
+    theme: "Create. Compete. Celebrate.",
+    issuer: "Torres Capitol College, Inc.",
+    subIssuer: "School of Information Technology",
+    recipient: "BRETAÑA, JOHN MICHAEL D.",
+    date: "February 24, 25, and 26, 2026",
+    location: "Torres Capitol College, Inc., Maramag, Bukidnon",
+    image: "/certificates/certificate-2.webp",
+    signatories: [
+      "April Jean D. Villas (BSIT Program Head)",
+      "Feelin Torres-Jumamil, DM, RN (College President)",
+    ],
+    skills: ["ICT Innovation", "Competitive Programming", "Excellence in IT", "Technical Leadership"],
+    color: "violet",
+  },
+  {
+    id: "digital-danger-zone-seminar",
+    title: "BSIT Seminar-Workshop: Digital Danger Zone",
+    theme: "Digital Danger Zone: Protecting Yourself in the Age of Digital Deception",
+    issuer: "Philippine Countryville College, Inc.",
+    subIssuer: "DICT Region 10 & BSIT Department",
+    recipient: "John Michael D. Bretana",
+    date: "Academic Year 2025–2026",
+    location: "College Library, 2nd Floor, Admin Bldg., PCCI, Maramag, Bukidnon",
+    image: "/certificates/certificate-3.webp",
+    signatories: [
+      "Keren Happuch Lacadin (Project Lead - DICT Region 10)",
+      "April Jean D. Villas (BSIT Program Head)",
+      "Feelin T. Jumamil, DM, (CAR), MAN, RN (VP for Administration)",
+      "Gordon M. Torres, EDL (College President)",
+      "Fe A. Torres, PhD (Executive Vice President)",
+    ],
+    skills: ["Cybersecurity Awareness", "Anti-Phishing & Digital Deception", "DICT Industry Standards", "Information Security"],
+    color: "amber",
+  },
+];
+

@@ -39,3 +39,18 @@ export interface CommandHistory {
   command: string;
   output: React.ReactNode;
 }
+
+export interface Certificate {
+  id: string;
+  title: string;
+  theme?: string;
+  issuer: string;
+  subIssuer?: string;
+  recipient: string;
+  date: string;
+  location?: string;
+  image: string;
+  signatories: string[];
+  skills: string[];
+  color: "cyan" | "violet" | "amber" | "emerald";
+}

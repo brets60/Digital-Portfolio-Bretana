@@ -22,6 +22,7 @@ export function Navbar() {
     { label: "Projects", href: "#projects" },
     { label: "Arsenal", href: "#skills" },
     { label: "Trajectory", href: "#experience" },
+    { label: "Certificates", href: "#certificates" },
     { label: "Uplink", href: "#contact" },
   ];
 
