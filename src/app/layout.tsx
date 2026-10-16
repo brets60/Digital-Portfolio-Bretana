@@ -5,6 +5,7 @@ import { Footer } from "@/components/common/Footer";
 import { CustomCursor } from "@/components/common/CustomCursor";
 import { SmoothScrollProvider } from "@/components/common/SmoothScrollProvider";
 import { ThemeProvider } from "@/context/ThemeContext";
+import { DayNightSky } from "@/components/common/DayNightSky";
 
 export const metadata: Metadata = {
   title: "John Michael D. Bretaña | Software Engineer & Creative Developer",
@@ -60,6 +61,9 @@ export default function RootLayout({
       <body className="bg-slate-50 text-slate-900 dark:bg-[#070b14] dark:text-slate-100 antialiased min-h-screen relative selection:bg-blue-600/30 selection:text-blue-600 dark:selection:text-blue-300 transition-colors duration-200">
         <ThemeProvider>
           <SmoothScrollProvider>
+            {/* Dynamic Celestial Day & Night Live Background */}
+            <DayNightSky />
+
             {/* Hardware Accelerated Custom Cursor */}
             <CustomCursor />
 

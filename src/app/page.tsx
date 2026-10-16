@@ -10,16 +10,13 @@ import { AchievementsSection } from "@/components/achievements/AchievementsSecti
 import { ServicesSection } from "@/components/services/ServicesSection";
 import { ReferencesSection } from "@/components/references/ReferencesSection";
 import { ContactSection } from "@/components/contact/ContactSection";
-import { DayNightSky } from "@/components/common/DayNightSky";
 
 export default function Home() {
   return (
-    <div className="relative min-h-screen bg-slate-50 dark:bg-[#070b14] text-slate-900 dark:text-slate-100 selection:bg-blue-600/30 selection:text-blue-600 dark:selection:text-blue-300 transition-colors duration-200">
-      {/* Dynamic Celestial Day & Night Sky Background */}
-      <DayNightSky />
-      {/* Subtle Dot Grid Background */}
+    <div className="relative min-h-screen text-slate-900 dark:text-slate-100 selection:bg-blue-600/30 selection:text-blue-600 dark:selection:text-blue-300">
+      {/* Subtle Dot Grid Accent */}
       <div
-        className="fixed inset-0 pointer-events-none opacity-25 dark:opacity-20 -z-10"
+        className="fixed inset-0 pointer-events-none opacity-20 dark:opacity-15 z-0"
         style={{
           backgroundImage: "radial-gradient(rgba(59, 130, 246, 0.25) 1px, transparent 1px)",
           backgroundSize: "32px 32px",
