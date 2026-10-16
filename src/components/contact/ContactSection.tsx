@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Mail, Facebook, Github, Linkedin, Send } from "lucide-react";
+import { Mail, Facebook, Github, Linkedin, Send, Phone, Copy, Check } from "lucide-react";
 import { DEVELOPER_PROFILE } from "@/lib/data";
 
 export function ContactSection() {
@@ -12,6 +12,15 @@ export function ContactSection() {
     message: "",
   });
   const [submitted, setSubmitted] = useState(false);
+  const [copiedText, setCopiedText] = useState<string | null>(null);
+
+  const handleCopy = (text: string, e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    navigator.clipboard.writeText(text);
+    setCopiedText(text);
+    setTimeout(() => setCopiedText(null), 2000);
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -21,28 +30,48 @@ export function ContactSection() {
 
   const contactItems = [
     {
+      label: "PHONE (TM)",
+      value: DEVELOPER_PROFILE.contact.phoneTm || "09061888611",
+      href: `tel:${DEVELOPER_PROFILE.contact.phoneTm || "09061888611"}`,
+      icon: Phone,
+      badge: "TM",
+      isPhone: true,
+    },
+    {
+      label: "PHONE (TNT)",
+      value: DEVELOPER_PROFILE.contact.phoneTnt || "09815936360",
+      href: `tel:${DEVELOPER_PROFILE.contact.phoneTnt || "09815936360"}`,
+      icon: Phone,
+      badge: "TNT",
+      isPhone: true,
+    },
+    {
       label: "EMAIL",
       value: DEVELOPER_PROFILE.contact.email,
       href: `mailto:${DEVELOPER_PROFILE.contact.email}`,
       icon: Mail,
+      isPhone: false,
     },
     {
       label: "FACEBOOK",
       value: DEVELOPER_PROFILE.contact.facebook,
       href: "https://facebook.com",
       icon: Facebook,
+      isPhone: false,
     },
     {
       label: "GITHUB",
       value: DEVELOPER_PROFILE.contact.github,
       href: `https://${DEVELOPER_PROFILE.contact.github}`,
       icon: Github,
+      isPhone: false,
     },
     {
       label: "LINKEDIN",
       value: DEVELOPER_PROFILE.contact.linkedin,
       href: "#",
       icon: Linkedin,
+      isPhone: false,
     },
   ];
 
@@ -57,36 +86,63 @@ export function ContactSection() {
           Contact Me
         </h2>
         <p className="text-slate-500 dark:text-slate-400 text-sm sm:text-base max-w-lg leading-relaxed transition-colors">
-          Feel free to reach out for inquiries, project discussions, or academic collaborations.
+          Feel free to call, message, or email me directly for project inquiries, technical roles, or academic collaborations.
         </p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
         {/* Left Column: Contact Channels */}
-        <div className="lg:col-span-5 space-y-4">
+        <div className="lg:col-span-5 space-y-3.5">
           {contactItems.map((item) => {
             const Icon = item.icon;
+            const isCopied = copiedText === item.value;
 
             return (
-              <a
+              <div
                 key={item.label}
-                href={item.href}
-                target={item.href.startsWith("http") ? "_blank" : undefined}
-                rel="noopener noreferrer"
-                className="bg-white dark:bg-[#0e1629] border border-slate-200 dark:border-[#1b2746] hover:border-blue-500/50 rounded-2xl p-5 flex items-center gap-4 transition-all hover:-translate-y-0.5 shadow-sm hover:shadow-md group block"
+                className="bg-white dark:bg-[#0e1629] border border-slate-200 dark:border-[#1b2746] hover:border-blue-500/50 rounded-2xl p-4 sm:p-5 flex items-center justify-between transition-all hover:-translate-y-0.5 shadow-sm hover:shadow-md group"
               >
-                <div className="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center shrink-0 text-blue-600 dark:text-blue-400 group-hover:scale-105 transition-transform">
-                  <Icon className="w-5 h-5" />
-                </div>
-                <div className="flex flex-col min-w-0">
-                  <span className="text-[11px] font-semibold tracking-wider text-slate-500 dark:text-slate-400 uppercase transition-colors">
-                    {item.label}
-                  </span>
-                  <span className="text-sm font-bold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-300 transition-colors truncate mt-0.5">
-                    {item.value}
-                  </span>
-                </div>
-              </a>
+                <a
+                  href={item.href}
+                  target={item.href.startsWith("http") ? "_blank" : undefined}
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-4 min-w-0 flex-1"
+                >
+                  <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center shrink-0 text-blue-600 dark:text-blue-400 group-hover:scale-105 transition-transform">
+                    <Icon className="w-5 h-5" />
+                  </div>
+                  <div className="flex flex-col min-w-0">
+                    <div className="flex items-center gap-2">
+                      <span className="text-[11px] font-semibold tracking-wider text-slate-500 dark:text-slate-400 uppercase transition-colors">
+                        {item.label}
+                      </span>
+                      {item.badge && (
+                        <span className="px-1.5 py-0.2 rounded text-[10px] font-mono font-bold bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20">
+                          {item.badge}
+                        </span>
+                      )}
+                    </div>
+                    <span className="text-sm font-bold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-300 transition-colors truncate mt-0.5">
+                      {item.value}
+                    </span>
+                  </div>
+                </a>
+
+                {/* 1-Click Copy Button */}
+                <button
+                  type="button"
+                  onClick={(e) => handleCopy(item.value, e)}
+                  className="p-2 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-[#131d36] dark:hover:bg-[#1c2b4c] text-slate-500 dark:text-slate-300 transition-colors shrink-0 ml-2"
+                  title={`Copy ${item.value}`}
+                  aria-label={`Copy ${item.value}`}
+                >
+                  {isCopied ? (
+                    <Check className="w-4 h-4 text-emerald-500" />
+                  ) : (
+                    <Copy className="w-4 h-4" />
+                  )}
+                </button>
+              </div>
             );
           })}
         </div>

@@ -13,6 +13,8 @@ export interface DeveloperProfile {
   stats: { value: string; label: string }[];
   contact: {
     email: string;
+    phoneTm?: string;
+    phoneTnt?: string;
     facebook: string;
     github: string;
     linkedin: string;
@@ -115,6 +117,8 @@ export const DEVELOPER_PROFILE: DeveloperProfile = {
   ],
   contact: {
     email: "bretanajohnmichael@gmail.com",
+    phoneTm: "09061888611",
+    phoneTnt: "09815936360",
     facebook: "John Michael Bretaña",
     github: "github.com/brets60",
     linkedin: "Coming Soon",
@@ -130,6 +134,8 @@ export const personalInfo = {
   location: "Maramag, Bukidnon",
   bio: DEVELOPER_PROFILE.bio,
   email: DEVELOPER_PROFILE.contact.email,
+  phoneTm: DEVELOPER_PROFILE.contact.phoneTm,
+  phoneTnt: DEVELOPER_PROFILE.contact.phoneTnt,
   github: `https://${DEVELOPER_PROFILE.contact.github}`,
   linkedin: DEVELOPER_PROFILE.contact.linkedin,
   twitter: "https://twitter.com",
