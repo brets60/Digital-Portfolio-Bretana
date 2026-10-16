@@ -74,6 +74,9 @@ export interface CertificateItem {
   image: string;
   signatories: string[];
   skills: string[];
+  category?: "academic" | "seminar";
+  badge?: string;
+  grade?: string;
 }
 
 export interface ReferenceItem {
@@ -371,39 +374,84 @@ export const EDUCATION: EducationItem[] = [
 export const ACHIEVEMENTS: AchievementItem[] = [
   {
     id: "academic",
-    title: "Academic Achievement",
-    subtitle: "Add academic honors or distinctions here.",
+    title: "Dean's List Academic Honor",
+    subtitle: "Consecutive Dean's Lister with an exceptional 1.28 GWA (2nd Semester) and 1.47 GWA (1st Semester) A.Y. 2024–2025.",
     iconName: "Award",
+    isCert: true,
   },
   {
     id: "project",
     title: "Project Achievement",
-    subtitle: "Add capstone milestones or project recognitions here.",
+    subtitle: "Lead developer on Speed Detection & Pedestrian IoT Warning System and 6 Antigravity AI platforms.",
     iconName: "Trophy",
   },
   {
     id: "certifications",
-    title: "Certification",
-    subtitle: "Official technical certifications and workshop credentials.",
+    title: "Certifications & Participation",
+    subtitle: "Official institutional certificates in IT hard skills, cybersecurity, and competitive ICT programming.",
     iconName: "Medal",
     isCert: true,
   },
   {
     id: "presentation",
-    title: "Presentation",
-    subtitle: "Add project presentations or defense milestones here.",
+    title: "Presentation & Defense",
+    subtitle: "Technical project presentations, system defenses, and academic showcases.",
     iconName: "Presentation",
   },
   {
     id: "training",
     title: "Training / Seminar",
-    subtitle: "Add technical workshops, seminars, or webinars here.",
+    subtitle: "Active participation in DICT Region 10 and BSIT technical development seminars.",
     iconName: "BookOpen",
     isCert: true,
   },
 ];
 
 export const CERTIFICATES: CertificateItem[] = [
+  {
+    id: "cert-deans-list-sem2",
+    title: "Dean's List Certificate — Second Semester A.Y. 2024-2025",
+    theme: "Obtained an Outstanding Average Grade of 1.28 (School of Information Technology)",
+    issuer: "Philippine Countryville College, Inc.",
+    subIssuer: "School of Information Technology",
+    recipient: "BRETAÑA, JOHN MICHAEL D.",
+    date: "October 3, 2025",
+    location: "Philippine Countryville College, Covered Court",
+    image: "/certificates/deans-list-sem2.webp",
+    category: "academic",
+    badge: "Dean's List • 1.28 GWA",
+    grade: "1.28 GWA",
+    signatories: [
+      "April Jean D. Villas (BSIT Program Head)",
+      "Sarah D. Estorgio (OIC-College Registrar)",
+      "Arnel V. Bangis, DM (Vice President for Academic Affairs)",
+      "Feelin Torres-Jumamil, DM(CAR), MAN, RN (College President)",
+    ],
+    skills: ["Academic Excellence", "Information Technology", "High Scholastic Standing", "Dean's Honors"],
+  },
+  {
+    id: "cert-deans-list-sem1",
+    title: "Dean's List Certificate — First Semester A.Y. 2024-2025",
+    theme: "Obtained a Commendable Average Grade of 1.47 (School of Information Technology)",
+    issuer: "Philippine Countryville College, Inc.",
+    subIssuer: "School of Information Technology",
+    recipient: "JOHN MICHAEL D. BRETAÑA",
+    date: "April 11, 2025",
+    location: "Philippine Countryville College, Covered Court",
+    image: "/certificates/deans-list-sem1.webp",
+    category: "academic",
+    badge: "Dean's List • 1.47 GWA",
+    grade: "1.47 GWA",
+    signatories: [
+      "April Jean D. Villas (BSIT Program Head)",
+      "Roxanne Jaynesney M. Marpa (College Registrar)",
+      "Arnel V. Bangis, DM (Vice President for Academic Affairs)",
+      "Fe A. Torres, PhD (Executive Vice President)",
+      "Gordon M. Torres, EDL (College President)",
+      "Feelin T. Jumamil, DM(CAR), MAN, RN (Vice President for Administration)",
+    ],
+    skills: ["Academic Excellence", "Information Technology", "Scholastic Distinction", "Dean's Honors"],
+  },
   {
     id: "cert-1",
     title: "BSIT Seminar-Workshop 2026: Certificate of Participation",
@@ -414,6 +462,8 @@ export const CERTIFICATES: CertificateItem[] = [
     date: "April 29, 2026",
     location: "TCC Covered Court, Panadtalan, Maramag, Bukidnon",
     image: "/certificates/certificate-1.webp",
+    category: "seminar",
+    badge: "BSIT Seminar-Workshop",
     signatories: [
       "April Jean D. Villas (BSIT Program Head)",
       "Feelin Torres-Jumamil, DM, RN (College President)",
@@ -430,6 +480,8 @@ export const CERTIFICATES: CertificateItem[] = [
     date: "February 24, 25, and 26, 2026",
     location: "Torres Capitol College, Inc., Maramag, Bukidnon",
     image: "/certificates/certificate-2.webp",
+    category: "seminar",
+    badge: "ICT Days 2026",
     signatories: [
       "April Jean D. Villas (BSIT Program Head)",
       "Feelin Torres-Jumamil, DM, RN (College President)",
@@ -446,6 +498,8 @@ export const CERTIFICATES: CertificateItem[] = [
     date: "Seminar-Workshop",
     location: "College Library, 2nd Floor, Admin Bldg., PCCI, Maramag, Bukidnon",
     image: "/certificates/certificate-3.webp",
+    category: "seminar",
+    badge: "Cybersecurity Workshop",
     signatories: [
       "Keren Happuch Lacadin (Project Lead - DICT Region 10)",
       "April Jean D. Villas (BSIT Program Head)",
