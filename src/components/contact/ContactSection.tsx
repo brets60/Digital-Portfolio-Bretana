@@ -50,13 +50,13 @@ export function ContactSection() {
     <section id="contact" className="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
       {/* Centered Section Header */}
       <div className="flex flex-col items-center text-center mb-16 space-y-3">
-        <div className="inline-flex items-center px-3.5 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/30 text-blue-400 text-xs font-semibold uppercase tracking-wider">
+        <div className="inline-flex items-center px-3.5 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/30 text-blue-600 dark:text-blue-400 text-xs font-semibold uppercase tracking-wider">
           GET IN TOUCH
         </div>
-        <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight">
+        <h2 className="text-3xl sm:text-5xl font-black text-slate-900 dark:text-white tracking-tight transition-colors">
           Contact Me
         </h2>
-        <p className="text-slate-400 text-sm sm:text-base max-w-lg leading-relaxed">
+        <p className="text-slate-500 dark:text-slate-400 text-sm sm:text-base max-w-lg leading-relaxed transition-colors">
           Feel free to reach out for inquiries, project discussions, or academic collaborations.
         </p>
       </div>
@@ -73,16 +73,16 @@ export function ContactSection() {
                 href={item.href}
                 target={item.href.startsWith("http") ? "_blank" : undefined}
                 rel="noopener noreferrer"
-                className="bg-[#0e1629] border border-[#1b2746] hover:border-blue-500/50 rounded-2xl p-5 flex items-center gap-4 transition-all hover:-translate-y-0.5 hover:shadow-lg group block"
+                className="bg-white dark:bg-[#0e1629] border border-slate-200 dark:border-[#1b2746] hover:border-blue-500/50 rounded-2xl p-5 flex items-center gap-4 transition-all hover:-translate-y-0.5 shadow-sm hover:shadow-md group block"
               >
-                <div className="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center shrink-0 text-blue-400 group-hover:scale-105 transition-transform">
+                <div className="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center shrink-0 text-blue-600 dark:text-blue-400 group-hover:scale-105 transition-transform">
                   <Icon className="w-5 h-5" />
                 </div>
                 <div className="flex flex-col min-w-0">
-                  <span className="text-[11px] font-semibold tracking-wider text-slate-400 uppercase">
+                  <span className="text-[11px] font-semibold tracking-wider text-slate-500 dark:text-slate-400 uppercase transition-colors">
                     {item.label}
                   </span>
-                  <span className="text-sm font-bold text-white group-hover:text-blue-300 transition-colors truncate mt-0.5">
+                  <span className="text-sm font-bold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-300 transition-colors truncate mt-0.5">
                     {item.value}
                   </span>
                 </div>
@@ -92,10 +92,10 @@ export function ContactSection() {
         </div>
 
         {/* Right Column: Contact Form */}
-        <div className="lg:col-span-7 bg-[#0e1629] border border-[#1b2746] rounded-2xl p-6 sm:p-8 shadow-xl">
+        <div className="lg:col-span-7 bg-white dark:bg-[#0e1629] border border-slate-200 dark:border-[#1b2746] rounded-2xl p-6 sm:p-8 shadow-md dark:shadow-xl transition-colors">
           <form onSubmit={handleSubmit} className="space-y-5">
             <div>
-              <label className="block text-xs font-semibold text-slate-300 mb-2">
+              <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-2 transition-colors">
                 Full Name
               </label>
               <input
@@ -104,12 +104,12 @@ export function ContactSection() {
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                 placeholder="Enter your full name"
-                className="w-full bg-[#0a1020] border border-[#1c2948] focus:border-blue-500 rounded-xl px-4 py-3 text-sm text-white placeholder:text-slate-500 outline-none transition-colors"
+                className="w-full bg-slate-50 dark:bg-[#0a1020] border border-slate-200 dark:border-[#1c2948] focus:border-blue-500 rounded-xl px-4 py-3 text-sm text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 outline-none transition-colors shadow-sm dark:shadow-none"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-slate-300 mb-2">
+              <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-2 transition-colors">
                 Email Address
               </label>
               <input
@@ -118,12 +118,12 @@ export function ContactSection() {
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                 placeholder="Enter your email address"
-                className="w-full bg-[#0a1020] border border-[#1c2948] focus:border-blue-500 rounded-xl px-4 py-3 text-sm text-white placeholder:text-slate-500 outline-none transition-colors"
+                className="w-full bg-slate-50 dark:bg-[#0a1020] border border-slate-200 dark:border-[#1c2948] focus:border-blue-500 rounded-xl px-4 py-3 text-sm text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 outline-none transition-colors shadow-sm dark:shadow-none"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-slate-300 mb-2">
+              <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-2 transition-colors">
                 Subject
               </label>
               <input
@@ -132,12 +132,12 @@ export function ContactSection() {
                 value={formData.subject}
                 onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
                 placeholder="Enter message subject"
-                className="w-full bg-[#0a1020] border border-[#1c2948] focus:border-blue-500 rounded-xl px-4 py-3 text-sm text-white placeholder:text-slate-500 outline-none transition-colors"
+                className="w-full bg-slate-50 dark:bg-[#0a1020] border border-slate-200 dark:border-[#1c2948] focus:border-blue-500 rounded-xl px-4 py-3 text-sm text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 outline-none transition-colors shadow-sm dark:shadow-none"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-slate-300 mb-2">
+              <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-2 transition-colors">
                 Message
               </label>
               <textarea
@@ -146,7 +146,7 @@ export function ContactSection() {
                 value={formData.message}
                 onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                 placeholder="Type your message here..."
-                className="w-full bg-[#0a1020] border border-[#1c2948] focus:border-blue-500 rounded-xl px-4 py-3 text-sm text-white placeholder:text-slate-500 outline-none transition-colors resize-none"
+                className="w-full bg-slate-50 dark:bg-[#0a1020] border border-slate-200 dark:border-[#1c2948] focus:border-blue-500 rounded-xl px-4 py-3 text-sm text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 outline-none transition-colors resize-none shadow-sm dark:shadow-none"
               />
             </div>
 

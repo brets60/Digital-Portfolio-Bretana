@@ -1,6 +1,6 @@
 # Bretaña — Digital Portfolio
 
-Personal digital portfolio and interactive engineering showcase of **John Michael D. Bretaña** (BSIT 4th Year, Software Engineer & Creative Developer).
+Personal digital portfolio and interactive engineering showcase of **John Michael D. Bretaña** (Software Engineer & Creative Developer).
 
 ## 🚀 Features
 

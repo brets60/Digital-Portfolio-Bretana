@@ -22,7 +22,7 @@ export interface DeveloperProfile {
 export interface ProjectItem {
   id: string;
   title: string;
-  category: "all" | "capstone" | "desktop" | "concepts";
+  category: "all" | "ai" | "capstone" | "desktop" | "concepts";
   categoryLabel: string;
   description: string;
   techStack: string[];
@@ -76,29 +76,39 @@ export interface CertificateItem {
   skills: string[];
 }
 
+export interface ReferenceItem {
+  id: string;
+  name: string;
+  role: string;
+  institution?: string;
+  contact: string;
+  type: "phone" | "email";
+  relationship?: string;
+}
+
 export const DEVELOPER_PROFILE: DeveloperProfile = {
   name: "John Michael Bretaña",
   nickname: "Brets",
   fullName: "John Michael Bretaña",
   course: "BS in Information Technology",
-  yearLevel: "BSIT 3",
-  field: "Information Technology",
-  careerGoal: "Software Developer / IT",
+  yearLevel: "Undergraduate / Tech Innovator",
+  field: "Information Technology & AI Systems",
+  careerGoal: "Software Developer / Full-Stack Engineer",
   roles: [
     "Software Developer",
-    "BSIT Student",
-    "IoT & System Builder",
-    "Desktop App Developer",
+    "Full-Stack Engineer",
+    "AI Systems Builder",
+    "IoT & Desktop Developer",
   ],
-  bio: "I am a Bachelor of Science in Information Technology student passionate about software development, system design, database management, hardware integration, and emerging technologies. I enjoy building practical technology solutions that can help people and communities.",
+  bio: "I am a Software Developer and Systems Engineer passionate about full-stack engineering, AI applications, system architecture, database design, and hardware IoT integration. I enjoy building intelligent, practical technology solutions that solve real-world problems.",
   aboutIntro:
-    "My name is John Michael Bretaña, also known as Brets. I am currently pursuing a Bachelor of Science in Information Technology. I am interested in software development, desktop applications, database systems, hardware integration, computer networking, and IoT-based technologies.",
+    "My name is John Michael Bretaña, also known as Brets. I am a Full-Stack Software Developer specializing in modern web ecosystems, generative AI systems, desktop applications, database architecture, and IoT hardware integration. I build modern, resilient applications that bridge software, intelligence, and physical hardware.",
   status: "Available for Projects",
   stats: [
-    { value: "5+", label: "Projects Built" },
+    { value: "9+", label: "Projects Built" },
+    { value: "6", label: "Antigravity AI Apps" },
     { value: "15+", label: "Technologies Mastered" },
     { value: "1", label: "Capstone Lead System" },
-    { value: "3rd", label: "Year BSIT Student" },
   ],
   contact: {
     email: "bretanajohnmichael@gmail.com",
@@ -125,6 +135,72 @@ export const personalInfo = {
 };
 
 export const PROJECTS: ProjectItem[] = [
+  {
+    id: "flora-ai",
+    title: "Flora AI — Botanical Vision & Plant Care Assistant",
+    category: "ai",
+    categoryLabel: "AI & Smart Apps",
+    description:
+      "Production-ready botanical intelligence app featuring Google Gemini Vision species identification, leaf disease pathology diagnosis, personalized digital garden organizer, and adaptive watering cadences.",
+    techStack: ["Next.js", "Python Gradio", "Gemini Vision", "TypeScript", "Tailwind CSS"],
+    image: "/projects/flora.png",
+    githubUrl: "https://github.com/brets60",
+  },
+  {
+    id: "agrimate-ai",
+    title: "AgriMate AI — Smart Farming Assistant for Small-Scale Farmers",
+    category: "ai",
+    categoryLabel: "AI & Smart Apps",
+    description:
+      "Full-stack agricultural mobile ecosystem empowering farmers with multimodal AI crop disease diagnosis, weather-driven irrigation advisories, soil health management, and plot cycle tracking.",
+    techStack: ["React Native", "Expo", "Node.js", "Express", "Supabase", "Gemini AI"],
+    image: "/projects/agrimate.png",
+    githubUrl: "https://github.com/brets60",
+  },
+  {
+    id: "phishguard-ai",
+    title: "PhishGuard AI — Real-Time Phishing & Fake Site Detector",
+    category: "ai",
+    categoryLabel: "AI & Smart Apps",
+    description:
+      "Cybersecurity defense application detecting brand impersonation, zero-day phishing domains, typosquatting, and malicious URLs in real time using heuristic analysis and AI threat inspection.",
+    techStack: ["Next.js 14", "PWA", "TypeScript", "Tailwind CSS", "Security Heuristics"],
+    image: "/projects/phishguard.png",
+    githubUrl: "https://github.com/brets60",
+  },
+  {
+    id: "techresolve-ai",
+    title: "TechResolve AI — Intelligent IT Troubleshooting Assistant",
+    category: "ai",
+    categoryLabel: "AI & Smart Apps",
+    description:
+      "Step-by-step IT support and diagnostics platform providing interactive solutions for computer hardware, Windows battery health, Wi-Fi networks, and OS crashes in Beginner and Pro modes.",
+    techStack: ["FastAPI", "Python", "React", "Tailwind CSS", "SQLite", "Gemini AI"],
+    image: "/projects/techresolve.png",
+    githubUrl: "https://github.com/brets60",
+  },
+  {
+    id: "studymate-ai",
+    title: "AI StudyMate — Intelligent Academic Tutor & Revision Ecosystem",
+    category: "ai",
+    categoryLabel: "AI & Smart Apps",
+    description:
+      "Comprehensive student productivity platform featuring 6 pedagogical AI tutoring modes, automatic lecture note summarization, flashcard spaced repetition, and exam practice generators.",
+    techStack: ["Next.js 15", "TypeScript", "Prisma", "Gemini AI", "KaTeX", "Tailwind CSS"],
+    image: "/projects/studymate.png",
+    githubUrl: "https://github.com/brets60",
+  },
+  {
+    id: "dawntactics-ai",
+    title: "DawnTactics AI — Competitive Strategy & Reactive Itemization Engine",
+    category: "ai",
+    categoryLabel: "AI & Smart Apps",
+    description:
+      "MLBB competitive draft assistant featuring 5v5 live counter-picking, real-time damage and CC composition analytics, death-defying item swap visualizers, and emblem optimization.",
+    techStack: ["React", "Vite", "TypeScript", "Tailwind CSS", "PWA", "Game Analytics"],
+    image: "/projects/dawntactics.png",
+    githubUrl: "https://github.com/brets60",
+  },
   {
     id: "speed-detection",
     title: "Speed Detection and Warning System with Pedestrian Alarm and CCTV Monitoring",
@@ -259,26 +335,36 @@ export const EXPERIENCES: ExperienceItem[] = [
 export const EDUCATION: EducationItem[] = [
   {
     id: "college",
-    period: "Present — BSIT 3",
+    period: "Present",
     degree: "Bachelor of Science in Information Technology",
     institution: "Torres Capitol College, Inc.",
     description:
-      "Currently enrolled in the Bachelor of Science in Information Technology. Developing practical knowledge in software development, databases, hardware integration, networking, and web technologies.",
+      "Pursuing a Bachelor of Science in Information Technology with specialized coursework in software development, AI systems, relational databases, hardware integration, and web engineering.",
     tags: [
       "Software Development",
+      "AI Applications",
       "Database Systems",
-      "Programming",
-      "Computer Networking",
+      "Hardware Integration",
       "Web Development",
     ],
   },
   {
     id: "shs",
-    period: "Previous Education",
-    degree: "Senior High School / Secondary Education",
-    institution: "Academic Background",
-    description: "Secondary education curriculum with foundational coursework in Information and Communications Technology.",
-    tags: ["ICT Track", "Computer Fundamentals", "Basic Programming"],
+    period: "Senior High School",
+    degree: "Senior High School — TVL / ICT Track",
+    institution: "Bukidnon National School of Home Industries",
+    description:
+      "Senior High School education completed at Bukidnon National School of Home Industries with foundational training in Information and Communications Technology, computer operations, and technical skills.",
+    tags: ["TVL-ICT", "Computer Systems", "Technical Foundations"],
+  },
+  {
+    id: "secondary",
+    period: "Junior High School",
+    degree: "Secondary Education (Junior High School)",
+    institution: "Bukidnon National School of Home Industries",
+    description:
+      "Secondary education completed at Bukidnon National School of Home Industries providing core academic foundations, collaborative project experience, and technical-vocational explorations.",
+    tags: ["Secondary Education", "Academics", "Vocational Training"],
   },
 ];
 
@@ -374,4 +460,41 @@ export const CERTIFICATES: CertificateItem[] = [
 export const certificates = CERTIFICATES;
 export const projects = PROJECTS;
 export const techSkills: any[] = [];
+
+export const REFERENCES: ReferenceItem[] = [
+  {
+    id: "ref-1",
+    name: "Jessiemae C. Jusayan",
+    role: "Character Reference",
+    relationship: "Professional & Personal Reference",
+    contact: "09971365037",
+    type: "phone",
+  },
+  {
+    id: "ref-2",
+    name: "David Mark Ybañez",
+    role: "Character Reference",
+    relationship: "Professional Reference",
+    contact: "090264662436",
+    type: "phone",
+  },
+  {
+    id: "ref-3",
+    name: "April Jean Villas",
+    role: "BSIT Program Head",
+    institution: "Torres Capitol College, Inc.",
+    relationship: "Academic Department Head & Mentor",
+    contact: "09760237827",
+    type: "phone",
+  },
+  {
+    id: "ref-4",
+    name: "Wilfredo Villas",
+    role: "Academic Reference",
+    relationship: "Academic & Character Mentor",
+    contact: "sirvils12345@gmail.com",
+    type: "email",
+  },
+];
+
 
