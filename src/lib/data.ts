@@ -375,6 +375,15 @@ export const EDUCATION: EducationItem[] = [
       "Secondary education completed at Bukidnon National School of Home Industries providing core academic foundations, collaborative project experience, and technical-vocational explorations.",
     tags: ["Secondary Education", "Academics", "Vocational Training"],
   },
+  {
+    id: "elementary",
+    period: "Elementary Education",
+    degree: "Primary & Elementary School Education",
+    institution: "Francisco Elementary School",
+    description:
+      "Primary school education completed at Francisco Elementary School, establishing early academic discipline, foundational literacy, numeracy, and active student involvement.",
+    tags: ["Primary Education", "Elementary", "Foundations"],
+  },
 ];
 
 export const ACHIEVEMENTS: AchievementItem[] = [
